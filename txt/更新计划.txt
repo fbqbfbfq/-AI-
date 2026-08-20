@@ -1,0 +1,10 @@
+1.✅ 在检索记忆时，检索相似度前ln(总记忆数)条记忆，最小为1，最大为10，向下取整（已实现 memory.retrieval_k()，与第5条兼容，冲突时以 ChromaDB 为准）
+2.✅ 在压缩记忆时，对需要压缩的内容按进行分类（每条 L2 记忆带 topic 字段存 ChromaDB 元数据，压缩器从已有话题列表选或新建；参考 AI1 的 llm_client.py/topic_file.py，未采用其"LLM粗筛+分文件存储"，按确认的推荐方案走）
+3.✅ L1仅保留近10轮记忆（l1_maxlen 默认 10，streamlit 界面显示亦为最近 10 轮）
+4.✅ 工具调用使用 json 维护（config/工具配置.json + 网页 JSON 文本栏，自定义工具可选 code 字段在受限沙箱执行；内置工具带介绍）
+5.✅ L2记忆转为使用chromaDB（ChromaDB PersistentClient + HNSW 余弦检索，维度按配置自适应=阿里云 1024；hnsw M=32/ef_construction=200/ef_search=60 适配 500~5000 数据量；旧 memory.json+vectors.npy 自动迁移；chromadb 已加入 requirements.txt）
+6.✅ 配制文件里模型要尽可能适配其他的模型（config/模型预设.json 存 7 家预设：DeepSeek/OpenAI/DashScope/GLM/Kimi/SiliconFlow/Ollama；网页一键应用，按预设 supported_params 自动过滤不支持的参数；所有字段加说明）
+7.✅ tool_kit第178行报错（RUN_CODE_TOOL_NAME 常量修复）、memory第316警告（删除未用形参 vec）、emotion第103行警告（docstring 补 user_text）；所有裸 except pass 全部接入异常日志
+8.✅ 测试文件夹 web 改名为 test；正常 AI 记忆文件夹 wechat 改名为 memory（目录已迁移，代码与文档同步）
+9.✅ 增加frequency_penalty（默认0.4）和presence_penalty（默认0.3）字段（config+ai_client+网页可调，按预设自动过滤）
+10.✅ 对话测试下加清除按钮（「🧹 清空测试对话」，清屏幕记录 + test 身份 L1 记忆）

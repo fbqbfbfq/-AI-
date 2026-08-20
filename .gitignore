@@ -1,0 +1,25 @@
+# ==== 隐私/密钥:绝对不要提交 ====
+# 配置文件(含 API Key,首次运行会自动生成默认配置)
+config/
+# 运行数据(对话记忆/向量库/情绪态;data/state.json 含微信 context_token)
+data/
+# 运行日志
+logs/
+
+# 二维码图片
+qrcode.png
+qrcode.svg
+qrcode.*
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# 测试临时目录
+_smoke_data/
+tools/.sandbox_tmp/
+
+# IDE
+.idea/

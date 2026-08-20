@@ -1,0 +1,4 @@
+requests>=2.31
+numpy>=1.26
+streamlit>=1.36
+chromadb>=0.5
